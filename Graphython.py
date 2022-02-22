@@ -1,28 +1,28 @@
 import tkinter as tk
 import numpy as np
 import pandas as pd
-import matplotlib as mpl
-import lmfit.models as mdl
+#import matplotlib as mpl
+#import lmfit.models as mdl
 import random
-from matplotlib.figure import Figure
-from matplotlib import pyplot as plt
+#from matplotlib.figure import Figure
+#from matplotlib import pyplot as plt
 from tkinter import messagebox as msg
-from matplotlib.backend_bases import key_press_handler
+#from matplotlib.backend_bases import key_press_handler
 from tkinter import ttk, Menu, Spinbox, filedialog, Text, scrolledtext
-from matplotlib.backends.backend_tkagg import (
-    FigureCanvasTkAgg, NavigationToolbar2Tk)
+#from matplotlib.backends.backend_tkagg import (
+ #   FigureCanvasTkAgg, NavigationToolbar2Tk)
 
 
 #=====================================================#
 #=======           Initial Parameters          =======#
 #=====================================================#
 
-mpl.use("TkAgg")
-mpl.style.use('seaborn-bright')
+#mpl.use("TkAgg")
+#mpl.style.use('seaborn-bright')
 root = tk.Tk()
 #root.geometry("800x600")
 root.resizable(True,False)
-root.title('GraphMaker')
+root.title('Graphython')
 
 
 #=====================================================#
@@ -235,7 +235,7 @@ def info_call():
 
 #===========| Message Box |============#
 def _msgBox():
-    msg.showinfo('About GraphMaker', 'This program was made in python with Tkinter module.\nYear of development: 2020.')  
+    msg.showinfo('About Graphython', 'Creator: Sinchan(sinx) \nYear of development: 2020 \nThis program is built with Python with the help of Tkinter module.')  
 
 #=========| Exit GUI cleanly |=========#
 def _quit():
@@ -285,16 +285,19 @@ menu_bar.add_cascade(label="Help", menu=help_menu)
 tabControl = ttk.Notebook(root)
 tab_1 = ttk.Frame(tabControl)
 tabControl.add(tab_1, text=' Graph ')
+'''
 tab_2 = ttk.Frame(tabControl)
 tabControl.add(tab_2, text=' Curve-fit ')
 tab_3 = ttk.Frame(tabControl)           
 tabControl.add(tab_3, text=' Statistics ')
+'''
 tabControl.pack(expand=1, fill="both")
 
 
 ########################################################################################
-#####################                   Tab-1 Area            ##########################
+#######################               Tab-1 Area            ############################
 ########################################################################################
+
 
 #=================| Graph-Canvas Frame |=================#
 graph_frame = ttk.LabelFrame(tab_1, text=' Graph Canvas ')
@@ -312,7 +315,6 @@ tool_canvas.create_text(300,25,fill="darkblue",font="Arial 15 italic bold",text=
 
 #=============================| Info-box |=============================#
 wdgt('label',graph_frame,'Info-box',None,None,None,None,0,2,6,0,1,1,'w')
-
 infobox = scrolledtext.ScrolledText(graph_frame, width=72, height=6, wrap=tk.WORD)
 infobox.grid(column=0, row=3, columnspan=3)
 
@@ -368,10 +370,10 @@ curRad = tk.Radiobutton(grid_, text="On", variable=radVar, value=1,).grid(column
 curRad = tk.Radiobutton(grid_, text="Off", variable=radVar, value=0,).grid(column=1, row=15,)
 
 #==========================| Button Area |==========================#
-wdgt('btn',plotting,'Add',None,None,None,openFile,1,16,10,0,1,1,None)           #Add btn
-wdgt('btn',plotting,'Plot',None,None,None,plotGraph,1,17,1,0,1,1,None)          #Plot btn
-wdgt('btn',plotting,'Apply',None,None,None,re_fresh,1,18,10,0,1,1,None)         #Apply btn
-wdgt('btn',plotting,'Close',None,None,None,_quit,1,19,1,0,1,1,None)             #Close btn
+wdgt('btn',plotting,'Add',None,None,None,openFile,1,16,10,0,1,1,None)     #Add btn
+wdgt('btn',plotting,'Plot',None,None,None,plotGraph,1,17,1,0,1,1,None)    #Plot btn
+wdgt('btn',plotting,'Apply',None,None,None,re_fresh,1,18,10,0,1,1,None)   #Apply btn
+wdgt('btn',plotting,'Close',None,None,None,_quit,1,19,1,0,1,1,None)       #Close btn
 
 '''
 #======================================================================================#
@@ -394,28 +396,28 @@ tool_canvas2.create_text(350,25,fill="darkblue",font="Arial 15 italic bold",text
 #===================| Deconvo Parameters Frame |===================#
 deconvo_area = ttk.LabelFrame(tab_2, text=' Curve Deconvolution ')
 deconvo_area.grid(column=0, row=2, columnspan=11, rowspan=4, padx=8, pady=4, sticky=tk.W)
-wdgt('btn',deconvo_area,'Import Graph',None,None,None,importGraph,0,4,0,5,1,1,'w')          #Import btn
-wdgt('btn',deconvo_area,'Deconvolute',None,None,None,deconvolute,3,4,0,5,1,1,'e')           #Deconvo btn
-wdgt('label',deconvo_area,'No. of Peaks',None,None,None,None,0,5,0,5,1,1,'w')               #Peaks label
+wdgt('btn',deconvo_area,'Import Graph',None,None,None,importGraph,0,4,0,5,1,1,'w')
+wdgt('btn',deconvo_area,'Deconvolute',None,None,None,deconvolute,3,4,0,5,1,1,'e')
+wdgt('label',deconvo_area,'No. of Peaks',None,None,None,None,0,5,0,5,1,1,'w')
 peaks_ = tk.IntVar()
-peak_chosen = ttk.Combobox(deconvo_area, width=9, textvariable=peaks_, state='readonly')    #Peak dropdown
+peak_chosen = ttk.Combobox(deconvo_area, width=9, textvariable=peaks_, state='readonly')
 peak_chosen['values'] = (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)
 peak_chosen.grid(column=0, row=6, padx=5, pady=2, sticky='w')
 peak_chosen.current(0)
-wdgt('btn',deconvo_area,'Set',None,None,None,setPeaks,0,7,2,5,1,1,'w')                      #Set btn
+wdgt('btn',deconvo_area,'Set',None,None,None,setPeaks,0,7,2,5,1,1,'w')
 
 #==========================| Range Entry |==========================#
-range_frame = ttk.LabelFrame(deconvo_area, text=' Set Graph Range ')                        #Range frame
+range_frame = ttk.LabelFrame(deconvo_area, text=' Set Graph Range ')
 range_frame.grid(column=0, row=8, columnspan=2, rowspan=2,pady=8)
-wdgt('label',range_frame,'From: ',None,None,None,None,0,9,0,5,1,1,None)                     #From label
+wdgt('label',range_frame,'From: ',None,None,None,None,0,9,0,5,1,1,None)
 range_from_entry = tk.IntVar(range_frame, value="0")
 range_from = ttk.Entry(range_frame, width=12, textvariable=range_from_entry)
 range_from.grid(column=1, row=9, pady=5)
-wdgt('label',range_frame,'To: ',None,None,None,None,2,9,0,5,1,1,None)                       #To label
+wdgt('label',range_frame,'To: ',None,None,None,None,2,9,0,5,1,1,None)
 range_to_entry = tk.IntVar(range_frame, value="0")
 range_to = ttk.Entry(range_frame, width=12, textvariable=range_to_entry)
 range_to.grid(column=3, row=9, pady=5)
-wdgt('btn',deconvo_area,'Apply',None,None,None,applyBtn,3,9,0,3,1,1,None)                   #Apply btn
+wdgt('btn',deconvo_area,'Apply',None,None,None,applyBtn,3,9,0,3,1,1,None)
 
 
 
@@ -452,5 +454,5 @@ statbox = scrolledtext.ScrolledText(graph_frame3, width=85, height=37, wrap=tk.W
 statbox.grid(column=0, row=3,)
 '''
 #=============| Program Ending |=============#
-root.iconbitmap('gicon.ico')
+#root.iconbitmap('gicon.ico')
 root.mainloop()
