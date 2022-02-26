@@ -468,8 +468,8 @@ chVarEn.trace('w', lambda unused0, unused1, unused2 : checkCallback())
 #=======================| Statistics Report |=======================#
 graph_frame3 = ttk.LabelFrame(tab_3, text=' Curve Fitting report ')
 graph_frame3.grid(column=0, row=0, padx=8, pady=4,columnspan=4, rowspan=5)
-statbox = scrolledtext.ScrolledText(graph_frame3, width=85, height=37, wrap=tk.WORD)
-statbox.grid(column=0, row=3,)
+stat_box = scrolledtext.ScrolledText(graph_frame3, width=85, height=37, wrap=tk.WORD)
+stat_box.grid(column=0, row=3,)
 '''
 # =============| Program Ending |=============#
 # root.iconbitmap('gicon.ico')
