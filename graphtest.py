@@ -2,6 +2,7 @@ import tkinter as tk
 import numpy as np
 import pandas as pd
 import matplotlib as mpl
+import seaborn as sns
 import lmfit.models as mdl
 import random
 from matplotlib.figure import Figure
