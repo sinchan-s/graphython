@@ -5,7 +5,7 @@ examples_jupyter
 LMfit-examples_python
 Modeling Data and Curve Fitting — Non-Linear Least-Squares Minimization and Curve-Fitting for Python_files
 additional_files
-*.ico
-*.png
-*.svg
+gicon.ico
+gicon.png
+gicon.svg
 graphtest.py
