@@ -1,29 +1,26 @@
+import random
 import tkinter as tk
+from tkinter import messagebox as msg
+from tkinter import ttk, Menu, Spinbox, filedialog, scrolledtext
+import lmfit.models as mdl
+import matplotlib as mpl
 import numpy as np
 import pandas as pd
-# import matplotlib as mpl
-# import lmfit.models as mdl
-import random
-# from matplotlib.figure import Figure
-# from matplotlib import pyplot as plt
-from tkinter import messagebox as msg
-# from matplotlib.backend_bases import key_press_handler
-from tkinter import ttk, Menu, Spinbox, filedialog, Text, scrolledtext
-
-# from matplotlib.backends.backend_tkagg import (
-#   FigureCanvasTkAgg, NavigationToolbar2Tk)
-
+from matplotlib import pyplot as plt
+from matplotlib.backends.backend_tkagg import (
+    FigureCanvasTkAgg, NavigationToolbar2Tk)
+from matplotlib.figure import Figure
 
 # =====================================================#
 # =======           Initial Parameters          =======#
 # =====================================================#
 
-# mpl.use("TkAgg")
-# mpl.style.use('seaborn-bright')
+mpl.use("TkAgg")
+mpl.style.use('seaborn-bright')
 root = tk.Tk()
 # root.geometry("800x600")
 root.resizable(True, False)
-root.title('Graphython')
+root.title('GraphMaker')
 
 # =====================================================#
 # =========          Global Variables         =========#
@@ -252,8 +249,7 @@ def info_call():
 
 # ===========| Message Box |============#
 def _msgBox():
-    msg.showinfo('About Graphython',
-                 'Creator: Sinchan(sinx) \nYear of development: 2020 \nThis program is built with Python with the help of Tkinter module.')
+    msg.showinfo('About GraphMaker', 'This program was made in python with Tkinter module.\nYear of development: 2020.')
 
 
 # =========| Exit GUI cleanly |=========#
@@ -277,9 +273,9 @@ def wdgt(widget, tabName, text_, textv_, he_, wi_, command_, c_, r_, py_, px_, c
                                             sticky=stik_)
 
 
-# ======================================================================================#
-# =======================                   Menu Area            =======================#
-# ======================================================================================#
+# ======================================================================================#     ####   ####
+# =======================                   Menu Area            =======================#    ##  |##|   ##
+# ======================================================================================#   ##    ##     ##
 
 # -------------------| Menu Bar |-------------------#
 menu_bar = Menu(root)
@@ -297,25 +293,22 @@ help_menu = Menu(menu_bar, tearoff=0)
 help_menu.add_command(label="About", command=_msgBox)
 menu_bar.add_cascade(label="Help", menu=help_menu)
 
-# ======================================================================================#
-# =======================                   Multi-Tab             ======================#
-# ======================================================================================#
+# ======================================================================================#    ##########
+# =======================                   Multi-Tab             ======================#    	##
+# ======================================================================================#    	##
 
 tabControl = ttk.Notebook(root)
 tab_1 = ttk.Frame(tabControl)
 tabControl.add(tab_1, text=' Graph ')
-'''
-tab_2 = ttk.Frame(tabControl)
+'''tab_2 = ttk.Frame(tabControl)
 tabControl.add(tab_2, text=' Curve-fit ')
-tab_3 = ttk.Frame(tabControl)           
-tabControl.add(tab_3, text=' Statistics ')
-'''
+tab_3 = ttk.Frame(tabControl)
+tabControl.add(tab_3, text=' Statistics ')'''
 tabControl.pack(expand=1, fill="both")
 
-########################################################################################
-#######################               Tab-1 Area            ############################
-########################################################################################
-
+########################################################################################		##
+#####################                   Tab-1 Area            ##########################		##
+########################################################################################		##
 
 # =================| Graph-Canvas Frame |=================#
 graph_frame = ttk.LabelFrame(tab_1, text=' Graph Canvas ')
@@ -333,6 +326,7 @@ tool_canvas.create_text(300, 25, fill="darkblue", font="Arial 15 italic bold", t
 
 # =============================| Info-box |=============================#
 wdgt('label', graph_frame, 'Info-box', None, None, None, None, 0, 2, 6, 0, 1, 1, 'w')
+
 infobox = scrolledtext.ScrolledText(graph_frame, width=72, height=6, wrap=tk.WORD)
 infobox.grid(column=0, row=3, columnspan=3)
 
@@ -394,11 +388,11 @@ wdgt('btn', plotting, 'Apply', None, None, None, re_fresh, 1, 18, 10, 0, 1, 1, N
 wdgt('btn', plotting, 'Close', None, None, None, _quit, 1, 19, 1, 0, 1, 1, None)  # Close btn
 
 '''
-#======================================================================================#
-#====================                   Tab-2 Area                 ====================#
-#======================================================================================#
+# ======================================================================================#		##  ##
+# ====================                   Tab-2 Area                 ====================#		##  ##
+# ======================================================================================#		##  ##
 
-#=====================| Graph Canvas2 Frame|=====================#
+# =====================| Graph Canvas2 Frame|=====================#
 graph_frame2 = ttk.LabelFrame(tab_2, text=' Curve Fitting Area ')
 graph_frame2.grid(column=0, row=0, columnspan=11, padx=8, pady=4)
 sec_graph_frame2 = tk.Canvas(graph_frame2, height=399, width=700, bg="#cfcfcf")
@@ -406,37 +400,36 @@ sec_graph_frame2.grid(column=0, row=0, columnspan=11)
 
 gr_canvas2 = tk.Canvas(sec_graph_frame2, height=350, width=700, bg="#cfcfcf")
 gr_canvas2.grid(column=0, row=0, columnspan=11)
-gr_canvas2.create_text(350,175,fill="darkblue",font="Arial 25 italic bold",text=" Import graph for deconvolution ")
+gr_canvas2.create_text(350, 175, fill="darkblue", font="Arial 25 italic bold", text=" Import graph for deconvolution ")
 tool_canvas2 = tk.Canvas(sec_graph_frame2, height=45, width=700, bg="#cfcfcf")
-tool_canvas2.grid(column=0, row=1,columnspan=11)
-tool_canvas2.create_text(350,25,fill="darkblue",font="Arial 15 italic bold",text=" ToolBar Area ")
+tool_canvas2.grid(column=0, row=1, columnspan=11)
+tool_canvas2.create_text(350, 25, fill="darkblue", font="Arial 15 italic bold", text=" ToolBar Area ")
 
-#===================| Deconvo Parameters Frame |===================#
+# ===================| Deconvo Parameters Frame |===================#
 deconvo_area = ttk.LabelFrame(tab_2, text=' Curve Deconvolution ')
 deconvo_area.grid(column=0, row=2, columnspan=11, rowspan=4, padx=8, pady=4, sticky=tk.W)
-wdgt('btn',deconvo_area,'Import Graph',None,None,None,importGraph,0,4,0,5,1,1,'w')
-wdgt('btn',deconvo_area,'Deconvolute',None,None,None,deconvolute,3,4,0,5,1,1,'e')
-wdgt('label',deconvo_area,'No. of Peaks',None,None,None,None,0,5,0,5,1,1,'w')
+wdgt('btn', deconvo_area, 'Import Graph', None, None, None, importGraph, 0, 4, 0, 5, 1, 1, 'w')  # Import btn
+wdgt('btn', deconvo_area, 'Deconvolute', None, None, None, deconvolute, 3, 4, 0, 5, 1, 1, 'e')  # Deconvo btn
+wdgt('label', deconvo_area, 'No. of Peaks', None, None, None, None, 0, 5, 0, 5, 1, 1, 'w')  # Peaks label
 peaks_ = tk.IntVar()
-peak_chosen = ttk.Combobox(deconvo_area, width=9, textvariable=peaks_, state='readonly')
-peak_chosen['values'] = (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)
+peak_chosen = ttk.Combobox(deconvo_area, width=9, textvariable=peaks_, state='readonly')  # Peak dropdown
+peak_chosen['values'] = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
 peak_chosen.grid(column=0, row=6, padx=5, pady=2, sticky='w')
 peak_chosen.current(0)
-wdgt('btn',deconvo_area,'Set',None,None,None,setPeaks,0,7,2,5,1,1,'w')
+wdgt('btn', deconvo_area, 'Set', None, None, None, setPeaks, 0, 7, 2, 5, 1, 1, 'w')  # Set btn
 
-#==========================| Range Entry |==========================#
-range_frame = ttk.LabelFrame(deconvo_area, text=' Set Graph Range ')
-range_frame.grid(column=0, row=8, columnspan=2, rowspan=2,pady=8)
-wdgt('label',range_frame,'From: ',None,None,None,None,0,9,0,5,1,1,None)
+# ==========================| Range Entry |==========================#
+range_frame = ttk.LabelFrame(deconvo_area, text=' Set Graph Range ')  # Range frame
+range_frame.grid(column=0, row=8, columnspan=2, rowspan=2, pady=8)
+wdgt('label', range_frame, 'From: ', None, None, None, None, 0, 9, 0, 5, 1, 1, None)  # From label
 range_from_entry = tk.IntVar(range_frame, value="0")
 range_from = ttk.Entry(range_frame, width=12, textvariable=range_from_entry)
 range_from.grid(column=1, row=9, pady=5)
-wdgt('label',range_frame,'To: ',None,None,None,None,2,9,0,5,1,1,None)
+wdgt('label', range_frame, 'To: ', None, None, None, None, 2, 9, 0, 5, 1, 1, None)  # To label
 range_to_entry = tk.IntVar(range_frame, value="0")
 range_to = ttk.Entry(range_frame, width=12, textvariable=range_to_entry)
 range_to.grid(column=3, row=9, pady=5)
-wdgt('btn',deconvo_area,'Apply',None,None,None,applyBtn,3,9,0,3,1,1,None)
-
+wdgt('btn', deconvo_area, 'Apply', None, None, None, applyBtn, 3, 9, 0, 3, 1, 1, None)  # Apply btn
 
 
 # Creating three checkbuttons
@@ -460,17 +453,19 @@ chVarUn.trace('w', lambda unused0, unused1, unused2 : checkCallback())
 chVarEn.trace('w', lambda unused0, unused1, unused2 : checkCallback())   
 
 
+# ======================================================================================#		##  ##  ##
+# ====================                   Tab-3 Area                 ====================#		##  ##  ##
+# ======================================================================================#		##  ##  ##
 
-#======================================================================================#
-#====================                   Tab-3 Area                 ====================#
-#======================================================================================#
-
-#=======================| Statistics Report |=======================#
+# =======================| Statistics Report |=======================#
 graph_frame3 = ttk.LabelFrame(tab_3, text=' Curve Fitting report ')
-graph_frame3.grid(column=0, row=0, padx=8, pady=4,columnspan=4, rowspan=5)
+graph_frame3.grid(column=0, row=0, padx=8, pady=4, columnspan=4, rowspan=5)
 stat_box = scrolledtext.ScrolledText(graph_frame3, width=85, height=37, wrap=tk.WORD)
-stat_box.grid(column=0, row=3,)
+stat_box.grid(column=0, row=3, )
 '''
-# =============| Program Ending |=============#
-# root.iconbitmap('gicon.ico')
+
+# =============| Program Icon |=============#
+root.iconbitmap('gicon.ico')
+
+
 root.mainloop()
