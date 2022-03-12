@@ -23,23 +23,6 @@ root.resizable(True, False)
 root.title('GraphMaker')
 
 # =====================================================#
-# =========          Global Variables         =========#
-# =====================================================#
-
-h_ = 1
-w_ = 14
-b_ = 1
-fg_ = 'white'
-fo_ = ("Roboto", 14, "bold")
-sl_ = tk.LEFT
-sr_ = tk.RIGHT
-st_ = tk.TOP
-sb_ = tk.BOTTOM
-re_ = tk.RAISED
-file_s = []
-
-
-# =====================================================#
 # =========           Functions Area          =========#
 # =====================================================#
 
@@ -262,8 +245,27 @@ def _quit():
 # =====================================================#
 # =========       Tkinter Functions Area      =========#
 # =====================================================#
+h_ = 1
+w_ = 14
+b_ = 1
+fg_ = 'white'
+fo_ = ("Roboto", 14, "bold")
+sl_ = tk.LEFT
+sr_ = tk.RIGHT
+st_ = tk.TOP
+sb_ = tk.BOTTOM
+re_ = tk.RAISED
+file_s = []
+
 
 # ==============| Widgets func |==============#
+''' wdgt('label', graph_frame, 'Info-box', None, None, None, None, 0, 2, 6, 0, 1, 1, 'w')
+class getWidget:
+    def __init__(self, widget, tabName, text_, textv, height, width, command, column, row, py, px, cs, rs, stik_, **kwargs):
+        self.textv = textv
+        self.stik_ = stik_
+        self.tabname = tabname
+'''
 def wdgt(widget, tabName, text_, textv_, he_, wi_, command_, c_, r_, py_, px_, cs_, rs_, stik_, **kwargs):
     if widget == 'btn':
         ttk.Button(tabName, text=text_, command=command_).grid(column=c_, row=r_, pady=py_, padx=px_, columnspan=cs_,
