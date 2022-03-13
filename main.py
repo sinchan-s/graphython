@@ -1,16 +1,17 @@
-import random
 import tkinter as tk
 from tkinter import messagebox as msg
 from tkinter import ttk, Menu, Spinbox, filedialog, scrolledtext
-import lmfit.models as mdl
 import matplotlib as mpl
 import numpy as np
 import pandas as pd
-from matplotlib import pyplot as plt
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg, NavigationToolbar2Tk)
 from matplotlib.figure import Figure
+from matplotlib import pyplot as plt
 
+'''import random
+import lmfit.models as mdl
+'''
 # =====================================================#
 # =======           Initial Parameters          =======#
 # =====================================================#
@@ -25,6 +26,18 @@ root.title('GraphMaker')
 # =====================================================#
 # =========           Functions Area          =========#
 # =====================================================#
+h_ = 1
+w_ = 14
+b_ = 1
+fg_ = 'white'
+fo_ = ("Roboto", 14, "bold")
+sl_ = tk.LEFT
+sr_ = tk.RIGHT
+st_ = tk.TOP
+sb_ = tk.BOTTOM
+re_ = tk.RAISED
+file_s = []
+
 
 # ================| Open menu callback |================#
 def openFile():
@@ -55,11 +68,11 @@ def sourceGraph(fig_d, colors_, canvas_area, tool_area, x_min=None, x_max=None, 
         if file_ == 'No file selected\n':
             pass
         else:
-            csvDf = pd.read_csv(open(file_), names=['xval', 'yval'])
+            csvDf = pd.read_csv(open(file_), names=['x_val', 'y_val'])
         global y_col
-        y_col = csvDf.yval
+        y_col = csvDf.y_val
         global x_col
-        x_col = csvDf.xval
+        x_col = csvDf.x_val
         if x_min == None or x_max == None:
             x_min = np.min(x_col)
             x_max = np.max(x_col)
@@ -86,14 +99,14 @@ def sourceGraph(fig_d, colors_, canvas_area, tool_area, x_min=None, x_max=None, 
 # =============|  Plot Button function |=============#
 def plotGraph():
     info_call()
-    pfig = (6, 4)
+    p_fig = (6, 4)
     cc_ = (color_chosen.get()).lower()
-    sourceGraph(pfig, cc_, gr_canvas, tool_canvas)
+    sourceGraph(p_fig, cc_, gr_canvas, tool_canvas)
 
 
 # =============| Refresh Button function |=============#
 def re_fresh():
-    pfig = (6, 4)
+    p_fig = (6, 4)
     cc_ = (color_chosen.get()).lower()
     sec_graph_frame.destroy()
     gr_canvas = tk.Canvas(graph_frame, height=400, width=600, bg="#ffffff")
@@ -101,20 +114,21 @@ def re_fresh():
     tool_canvas = tk.Canvas(graph_frame, height=45, width=600, bg="#cfcfcf")
     tool_canvas.grid(column=0, row=1, columnspan=3)
     info_call()
-    sourceGraph(pfig, cc_, gr_canvas, tool_canvas)
+    sourceGraph(p_fig, cc_, gr_canvas, tool_canvas)
 
 
+'''
 # =============|  Import Button function |=============#
 def importGraph():
     infobox.insert(tk.INSERT, "\nGraph imported for Curve-Fitting\n")
-    pfig = (7, 3.5)
+    p_fig = (7, 3.5)
     cc_ = 'k'
-    sourceGraph(pfig, cc_, gr_canvas2, tool_canvas2)
+    sourceGraph(p_fig, cc_, gr_canvas2, tool_canvas2)
 
 
 # =============| Apply Button function |=============#
 def applyBtn():
-    pfig = (7, 3.5)
+    p_fig = (7, 3.5)
     cc_ = 'k'
     global xMin
     xMin = int(range_from.get())
@@ -126,8 +140,9 @@ def applyBtn():
     tool_canvas2 = tk.Canvas(graph_frame2, height=45, width=700, bg="#cfcfcf")
     tool_canvas2.grid(column=0, row=1, columnspan=3)
     info_call()
-    sourceGraph(pfig, cc_, gr_canvas2, tool_canvas2, x_min=xMin, x_max=xMax)
+    sourceGraph(p_fig, cc_, gr_canvas2, tool_canvas2, x_min=xMin, x_max=xMax)
     return xMin, xMax
+
 
 
 # ============| Generate deconvolution function |============#
@@ -135,8 +150,8 @@ def generate_model(spec):
     try:
         selected_range = csvDf[(x_col > (xMin - 1)) & (x_col < xMax + 1)]
         global x, y, params
-        x = selected_range.xval
-        y = selected_range.yval
+        x = selected_range.x_val
+        y = selected_range.y_val
         composite_model = None
         params = None
         x_min = np.min(x)
@@ -211,6 +226,8 @@ def setPeaks():
     slider_h.destroy()
 
 
+
+
 # = GUI Callback function - Checkbox=#
 def checkCallback(*ignoredArgs):
     # only enable one checkbutton
@@ -222,11 +239,17 @@ def checkCallback(*ignoredArgs):
         check2.configure(state='disabled')
     else:
         check2.configure(state='normal')
+'''
 
 
-# ===========| Info-box ouput function |============#
+# ===========| Info-box output function |============#
 def info_call():
-    info = f'\n~Graph name: {grtitle.get()}\n~X-Label: {xlabel.get()}\n~Y-Label: {ylabel.get()}\n~Legend: {grlegend.get()}\n~Line Thickness: {line_thik.get()}\n~Line color: {color_chosen.get()}\n'
+    info = f'\n~Graph name: {grtitle.get()}\n' \
+           f'~X-Label: {xlabel.get()}\n' \
+           f'~Y-Label: {ylabel.get()}\n' \
+           f'~Legend: {grlegend.get()}\n' \
+           f'~Line Thickness: {line_thik.get()}\n' \
+           f'~Line color: {color_chosen.get()}\n'
     infobox.insert(tk.INSERT, info)
 
 
@@ -245,28 +268,7 @@ def _quit():
 # =====================================================#
 # =========       Tkinter Functions Area      =========#
 # =====================================================#
-h_ = 1
-w_ = 14
-b_ = 1
-fg_ = 'white'
-fo_ = ("Roboto", 14, "bold")
-sl_ = tk.LEFT
-sr_ = tk.RIGHT
-st_ = tk.TOP
-sb_ = tk.BOTTOM
-re_ = tk.RAISED
-file_s = []
-
-
-# ==============| Widgets func |==============#
-''' wdgt('label', graph_frame, 'Info-box', None, None, None, None, 0, 2, 6, 0, 1, 1, 'w')
-class getWidget:
-    def __init__(self, widget, tabName, text_, textv, height, width, command, column, row, py, px, cs, rs, stik_, **kwargs):
-        self.textv = textv
-        self.stik_ = stik_
-        self.tabname = tabname
-'''
-def wdgt(widget, tabName, text_, textv_, he_, wi_, command_, c_, r_, py_, px_, cs_, rs_, stik_, **kwargs):
+def widget_func(widget, tabName, text_, textv_, he_, wi_, command_, c_, r_, py_, px_, cs_, rs_, stik_, **kwargs):
     if widget == 'btn':
         ttk.Button(tabName, text=text_, command=command_).grid(column=c_, row=r_, pady=py_, padx=px_, columnspan=cs_,
                                                                rowspan=rs_, sticky=stik_)
@@ -275,6 +277,14 @@ def wdgt(widget, tabName, text_, textv_, he_, wi_, command_, c_, r_, py_, px_, c
                                             sticky=stik_)
 
 
+# ==============| Widgets func |==============#
+'''class getWidget:
+    def __init__(self, widget, tabName, text_, textv, height, width, 
+    command, column, row, py, px, cs, rs, stik_, **kwargs):
+        self.textv = textv
+        self.stik_ = stik_
+        self.tabname = tabname
+'''
 # ======================================================================================#     ####   ####
 # =======================                   Menu Area            =======================#    ##  |##|   ##
 # ======================================================================================#   ##    ##     ##
@@ -308,9 +318,9 @@ tab_3 = ttk.Frame(tabControl)
 tabControl.add(tab_3, text=' Statistics ')'''
 tabControl.pack(expand=1, fill="both")
 
-########################################################################################		##
-#####################                   Tab-1 Area            ##########################		##
-########################################################################################		##
+# #######################################################################################		##
+# ####################                   Tab-1 Area            ##########################		##
+# #######################################################################################		##
 
 # =================| Graph-Canvas Frame |=================#
 graph_frame = ttk.LabelFrame(tab_1, text=' Graph Canvas ')
@@ -327,7 +337,7 @@ tool_canvas.grid(column=0, row=1, columnspan=3)
 tool_canvas.create_text(300, 25, fill="darkblue", font="Arial 15 italic bold", text=" ToolBar Area ")
 
 # =============================| Info-box |=============================#
-wdgt('label', graph_frame, 'Info-box', None, None, None, None, 0, 2, 6, 0, 1, 1, 'w')
+widget_func('label', graph_frame, 'Info-box', None, None, None, None, 0, 2, 6, 0, 1, 1, 'w')
 
 infobox = scrolledtext.ScrolledText(graph_frame, width=72, height=6, wrap=tk.WORD)
 infobox.grid(column=0, row=3, columnspan=3)
@@ -337,41 +347,41 @@ plotting = ttk.LabelFrame(tab_1, text=' Plotting ')
 plotting.grid(column=4, row=0, rowspan=2, padx=8, pady=4, sticky=tk.E)
 
 # ============================| Graph Name |============================#
-wdgt('label', plotting, 'Graph Name', None, None, None, None, 1, 0, 0, 0, 1, 1, None)
+widget_func('label', plotting, 'Graph Name', None, None, None, None, 1, 0, 0, 0, 1, 1, None)
 grtitle = tk.StringVar(plotting, value="X vs Y")
 graph_name_entered = ttk.Entry(plotting, width=12, textvariable=grtitle)
 graph_name_entered.grid(column=1, row=1, pady=5)
 
 # ============================| X-Label |============================#
-wdgt('label', plotting, 'X-Label', None, None, None, None, 1, 2, 0, 0, 1, 1, None)
+widget_func('label', plotting, 'X-Label', None, None, None, None, 1, 2, 0, 0, 1, 1, None)
 xlabel = tk.StringVar(plotting, value="<default>")
 x_name_entered = ttk.Entry(plotting, width=12, textvariable=xlabel)
 x_name_entered.grid(column=1, row=3, pady=5)
 
 # ============================| Y-Label |============================#
-wdgt('label', plotting, 'Y-Label', None, None, None, None, 1, 4, 0, 0, 1, 1, None)
+widget_func('label', plotting, 'Y-Label', None, None, None, None, 1, 4, 0, 0, 1, 1, None)
 ylabel = tk.StringVar(plotting, value="<default>")
 y_name_entered = ttk.Entry(plotting, width=12, textvariable=ylabel)
 y_name_entered.grid(column=1, row=5, pady=5)
 
 # ============================| Legend |============================#
-wdgt('label', plotting, 'Legend', None, None, None, None, 1, 6, 0, 0, 1, 1, None)
+widget_func('label', plotting, 'Legend', None, None, None, None, 1, 6, 0, 0, 1, 1, None)
 grlegend = tk.StringVar(plotting, value="main curve")
 legend_name_entered = ttk.Entry(plotting, width=12, textvariable=grlegend)
 legend_name_entered.grid(column=1, row=7, pady=5)
 
 # ==============================| Line thick |==============================#
-wdgt('label', plotting, 'Line Thickness', None, None, None, None, 1, 8, 0, 0, 1, 1, None)
+widget_func('label', plotting, 'Line Thickness', None, None, None, None, 1, 8, 0, 0, 1, 1, None)
 line_thik = Spinbox(plotting, values=(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), width=10, bd=2, relief=tk.RAISED)
 line_thik.grid(column=1, row=9, pady=5)
 lt = line_thik.get()
 
 # ========================-| Line color Dropdown |========================#
-wdgt('label', plotting, 'Line Colour', None, None, None, None, 1, 10, 0, 0, 1, 1, None)
+widget_func('label', plotting, 'Line Colour', None, None, None, None, 1, 10, 0, 0, 1, 1, None)
 color_ = tk.StringVar()
 color_chosen = ttk.Combobox(plotting, width=9, textvariable=color_, state='readonly')
 color_chosen['values'] = (
-'Red', 'Blue', 'Green', 'Cyan', 'Magenta', 'Orange', 'Yellow', 'Olive', 'Gray', 'Purple', 'Brown', 'Black')
+    'Red', 'Blue', 'Green', 'Cyan', 'Magenta', 'Orange', 'Yellow', 'Olive', 'Gray', 'Purple', 'Brown', 'Black')
 color_chosen.grid(column=1, row=11, pady=5)
 color_chosen.current(0)
 
@@ -381,13 +391,13 @@ grid_.grid(column=1, row=13, padx=6, )
 radVar = tk.IntVar()
 radVar.set(0)
 curRad = tk.Radiobutton(grid_, text="On", variable=radVar, value=1, ).grid(column=1, row=14, )
-curRad = tk.Radiobutton(grid_, text="Off", variable=radVar, value=0, ).grid(column=1, row=15, )
+curRad2 = tk.Radiobutton(grid_, text="Off", variable=radVar, value=0, ).grid(column=1, row=15, )
 
 # ==========================| Button Area |==========================#
-wdgt('btn', plotting, 'Add', None, None, None, openFile, 1, 16, 10, 0, 1, 1, None)  # Add btn
-wdgt('btn', plotting, 'Plot', None, None, None, plotGraph, 1, 17, 1, 0, 1, 1, None)  # Plot btn
-wdgt('btn', plotting, 'Apply', None, None, None, re_fresh, 1, 18, 10, 0, 1, 1, None)  # Apply btn
-wdgt('btn', plotting, 'Close', None, None, None, _quit, 1, 19, 1, 0, 1, 1, None)  # Close btn
+widget_func('btn', plotting, 'Add', None, None, None, openFile, 1, 16, 10, 0, 1, 1, None)  # Add btn
+widget_func('btn', plotting, 'Plot', None, None, None, plotGraph, 1, 17, 1, 0, 1, 1, None)  # Plot btn
+widget_func('btn', plotting, 'Refresh', None, None, None, re_fresh, 1, 18, 10, 0, 1, 1, None)  # Refresh btn
+widget_func('btn', plotting, 'Close', None, None, None, _quit, 1, 19, 1, 0, 1, 1, None)  # Close btn
 
 '''
 # ======================================================================================#		##  ##
@@ -468,6 +478,5 @@ stat_box.grid(column=0, row=3, )
 
 # =============| Program Icon |=============#
 root.iconbitmap('gicon.ico')
-
 
 root.mainloop()
