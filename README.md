@@ -2,7 +2,7 @@
 Graphython app is a graph making program. It makes matplotlib graphs more easy to visualize.
 This program takes n_rows x 2_columns.
 
-The commented code in the main.py are intentioned for projrct scope expansion in the deconvolution of curves space
+future_scope.py is intentioned for project scope expansion in the deconvolution of curves
 
 ## Requirements
 Python 3.6+
