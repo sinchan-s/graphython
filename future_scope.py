@@ -1,4 +1,14 @@
 import random
+import numpy as np
+import pandas as pd
+import tkinter as tk
+from tkinter import messagebox as msg
+from tkinter import ttk, Menu, Spinbox, filedialog, scrolledtext
+import matplotlib as mpl
+from matplotlib import pyplot as plt
+from matplotlib.backends.backend_tkagg import (
+    FigureCanvasTkAgg, NavigationToolbar2Tk)
+from matplotlib.figure import Figure
 import lmfit.models as mdl
 
 # =============|  Import Button function |=============#

@@ -1,13 +1,14 @@
+import numpy as np
+import pandas as pd
 import tkinter as tk
 from tkinter import messagebox as msg
 from tkinter import ttk, Menu, Spinbox, filedialog, scrolledtext
 import matplotlib as mpl
-import numpy as np
-import pandas as pd
+from matplotlib import pyplot as plt
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg, NavigationToolbar2Tk)
 from matplotlib.figure import Figure
-from matplotlib import pyplot as plt
+
 
 # =====================================================#
 # =======           Initial Parameters          =======#
@@ -15,10 +16,10 @@ from matplotlib import pyplot as plt
 
 mpl.use("TkAgg")
 mpl.style.use('seaborn-bright')
-root = tk.Tk()
-# root.geometry("800x600")
-root.resizable(True, False)
-root.title('GraphMaker')
+app = tk.Tk()
+# app.geometry("800x600")
+app.resizable(True, False)
+app.title('GraphMaker')
 
 # =====================================================#
 # =========           Functions Area          =========#
@@ -127,13 +128,13 @@ def info_call():
 
 # ===========| Message Box |============#
 def _msgBox():
-    msg.showinfo('About GraphMaker', 'This program was made in python with Tkinter module.\nYear of development: 2020.')
+    msg.showinfo('About GraphMaker', 'This program is made in Python with Tkinter module.\nYear of development: 2020.')
 
 
 # =========| Exit GUI cleanly |=========#
 def _quit():
-    root.quit()
-    root.destroy()
+    app.quit()
+    app.destroy()
     exit()
 
 
@@ -149,21 +150,13 @@ def widget_func(widget, tabName, text_, textv_, he_, wi_, command_, c_, r_, py_,
                                             sticky=stik_)
 
 
-# ==============| Widgets func |==============#
-'''class getWidget:
-    def __init__(self, widget, tabName, text_, textv, height, width, 
-    command, column, row, py, px, cs, rs, stik_, **kwargs):
-        self.textv = textv
-        self.stik_ = stik_
-        self.tabname = tabname
-'''
-# ======================================================================================#     ####   ####
-# =======================                   Menu Area            =======================#    ##  |##|   ##
-# ======================================================================================#   ##    ##     ##
+# ======================================================================================#
+# =======================                   Menu Area            =======================#
+# ======================================================================================#
 
 # -------------------| Menu Bar |-------------------#
-menu_bar = Menu(root)
-root.config(menu=menu_bar)
+menu_bar = Menu(app)
+app.config(menu=menu_bar)
 
 # -------------------| File Menu |------------------#
 file_menu = Menu(menu_bar, tearoff=0)
@@ -177,18 +170,18 @@ help_menu = Menu(menu_bar, tearoff=0)
 help_menu.add_command(label="About", command=_msgBox)
 menu_bar.add_cascade(label="Help", menu=help_menu)
 
-# ======================================================================================#    ##########
-# =======================                   Multi-Tab             ======================#    	##
-# ======================================================================================#    	##
+# ======================================================================================#
+# =======================                   Multi-Tab             ======================#
+# ======================================================================================#
 
-tabControl = ttk.Notebook(root)
+tabControl = ttk.Notebook(app)
 tab_1 = ttk.Frame(tabControl)
 tabControl.add(tab_1, text=' Graph ')
 tabControl.pack(expand=1, fill="both")
 
-# #######################################################################################		##
-# ####################                   Tab-1 Area            ##########################		##
-# #######################################################################################		##
+# #######################################################################################
+# ####################                   Tab-1 Area            ##########################
+# #######################################################################################
 
 # =================| Graph-Canvas Frame |=================#
 graph_frame = ttk.LabelFrame(tab_1, text=' Graph Canvas ')
@@ -262,13 +255,13 @@ curRad = tk.Radiobutton(grid_, text="On", variable=radVar, value=1, ).grid(colum
 curRad2 = tk.Radiobutton(grid_, text="Off", variable=radVar, value=0, ).grid(column=1, row=15, )
 
 # ==========================| Button Area |==========================#
-widget_func('btn', plotting, 'Add', None, None, None, openFile, 1, 16, 10, 0, 1, 1, None)  # Add btn
-widget_func('btn', plotting, 'Plot', None, None, None, plotGraph, 1, 17, 1, 0, 1, 1, None)  # Plot btn
-widget_func('btn', plotting, 'Refresh', None, None, None, re_fresh, 1, 18, 10, 0, 1, 1, None)  # Refresh btn
-widget_func('btn', plotting, 'Close', None, None, None, _quit, 1, 19, 1, 0, 1, 1, None)  # Close btn
+widget_func('btn', plotting, 'Add', None, None, None, openFile, 1, 16, 10, 0, 1, 1, None)
+widget_func('btn', plotting, 'Plot', None, None, None, plotGraph, 1, 17, 1, 0, 1, 1, None)
+widget_func('btn', plotting, 'Refresh', None, None, None, re_fresh, 1, 18, 10, 0, 1, 1, None)
+widget_func('btn', plotting, 'Close', None, None, None, _quit, 1, 19, 1, 0, 1, 1, None)
 
 
 # =============| Program Icon |=============#
-root.iconbitmap('gicon.ico')
+app.iconbitmap('gicon.ico')
 
-root.mainloop()
+app.mainloop()
