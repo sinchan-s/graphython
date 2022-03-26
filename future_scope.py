@@ -2,13 +2,8 @@ import random
 import numpy as np
 import pandas as pd
 import tkinter as tk
-from tkinter import messagebox as msg
 from tkinter import ttk, Menu, Spinbox, filedialog, scrolledtext
-import matplotlib as mpl
 from matplotlib import pyplot as plt
-from matplotlib.backends.backend_tkagg import (
-    FigureCanvasTkAgg, NavigationToolbar2Tk)
-from matplotlib.figure import Figure
 import lmfit.models as mdl
 
 # =============|  Import Button function |=============#
@@ -118,8 +113,6 @@ def setPeaks():
     slider_h.destroy()
 
 
-
-
 # = GUI Callback function - Checkbox=#
 def checkCallback(*ignoredArgs):
     # only enable one checkbutton
@@ -202,11 +195,7 @@ check3.grid(column=2, row=4, sticky=tk.W)
 chVarUn.trace('w', lambda unused0, unused1, unused2 : checkCallback())
 chVarEn.trace('w', lambda unused0, unused1, unused2 : checkCallback())
 
-
-# ======================================================================================#		##  ##  ##
-# ====================                   Tab-3 Area                 ====================#		##  ##  ##
-# ======================================================================================#		##  ##  ##
-
+# TAB AREA 3
 # =======================| Statistics Report |=======================#
 graph_frame3 = ttk.LabelFrame(tab_3, text=' Curve Fitting report ')
 graph_frame3.grid(column=0, row=0, padx=8, pady=4, columnspan=4, rowspan=5)
