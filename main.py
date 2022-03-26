@@ -9,10 +9,7 @@ from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg, NavigationToolbar2Tk)
 from matplotlib.figure import Figure
 
-
-# =====================================================#
-# =======           Initial Parameters          =======#
-# =====================================================#
+# Initialization
 
 mpl.use("TkAgg")
 mpl.style.use('seaborn-bright')
@@ -21,9 +18,7 @@ app = tk.Tk()
 app.resizable(True, False)
 app.title('GraphMaker')
 
-# =====================================================#
-# =========           Functions Area          =========#
-# =====================================================#
+# Global Variables
 h_ = 1
 w_ = 14
 b_ = 1
@@ -35,6 +30,11 @@ st_ = tk.TOP
 sb_ = tk.BOTTOM
 re_ = tk.RAISED
 file_s = []
+
+
+# Custom class for functions
+class GraphyFunc:
+    pass
 
 
 # ================| Open menu callback |================#
@@ -138,9 +138,7 @@ def _quit():
     exit()
 
 
-# =====================================================#
-# =========       Tkinter Functions Area      =========#
-# =====================================================#
+# Tkinter widget maker
 def widget_func(widget, tabName, text_, textv_, he_, wi_, command_, c_, r_, py_, px_, cs_, rs_, stik_, **kwargs):
     if widget == 'btn':
         ttk.Button(tabName, text=text_, command=command_).grid(column=c_, row=r_, pady=py_, padx=px_, columnspan=cs_,
@@ -150,9 +148,7 @@ def widget_func(widget, tabName, text_, textv_, he_, wi_, command_, c_, r_, py_,
                                             sticky=stik_)
 
 
-# ======================================================================================#
-# =======================                   Menu Area            =======================#
-# ======================================================================================#
+# Menu Area
 
 # -------------------| Menu Bar |-------------------#
 menu_bar = Menu(app)
@@ -170,18 +166,11 @@ help_menu = Menu(menu_bar, tearoff=0)
 help_menu.add_command(label="About", command=_msgBox)
 menu_bar.add_cascade(label="Help", menu=help_menu)
 
-# ======================================================================================#
-# =======================                   Multi-Tab             ======================#
-# ======================================================================================#
-
+# ===================| Tab-control |===================#
 tabControl = ttk.Notebook(app)
 tab_1 = ttk.Frame(tabControl)
 tabControl.add(tab_1, text=' Graph ')
 tabControl.pack(expand=1, fill="both")
-
-# #######################################################################################
-# ####################                   Tab-1 Area            ##########################
-# #######################################################################################
 
 # =================| Graph-Canvas Frame |=================#
 graph_frame = ttk.LabelFrame(tab_1, text=' Graph Canvas ')
