@@ -16,19 +16,28 @@ Python 3.6+
 ## Project demo
    
 **Main Application View:**   
-![image](https://user-images.githubusercontent.com/63915540/178118555-f0a24843-1503-4ffb-bae0-6f2dfae66701.png)   
    
+![pic1](https://user-images.githubusercontent.com/63915540/178118888-9cdb7ed2-8129-4f72-9584-5b0bad4ac3de.jpg)   
+   
+    
 **Various Application Features:**   
-![image](https://user-images.githubusercontent.com/63915540/178118423-8df43651-005c-40af-a587-67c855746d67.png)   
+    
+![detpic1](https://user-images.githubusercontent.com/63915540/178118876-9bf2ddeb-2bd3-4af4-b121-cefce5d91848.jpg)   
+   
    
 **Actual Graph View:**    
-![image](https://user-images.githubusercontent.com/63915540/178118458-3c370a0f-b2c6-48c7-b4da-a5dece95476c.png)   
+   
+![pic2](https://user-images.githubusercontent.com/63915540/178118920-840b07a8-22be-4ca6-bb01-ad67b637034c.jpg)      
+   
    
 **Graph Pan & Zoom Feature:**   
-![image](https://user-images.githubusercontent.com/63915540/178118464-938a2f4b-e4a7-41e9-b78e-70925844c014.png)   
+   
+![comb1](https://user-images.githubusercontent.com/63915540/178118820-12767ec5-52b1-434c-a191-8431c6343d09.jpg)   
    
 **Tab Options:**   
-![image](https://user-images.githubusercontent.com/63915540/178118475-ebd57065-eb15-4f9c-914b-e57a96628391.png)
+   
+![comb2](https://user-images.githubusercontent.com/63915540/178118868-0c710a14-d0bb-4c39-8d3e-b9a3d7e4d6ee.jpg)   
+
 
 
 
